@@ -2,23 +2,36 @@
 
 ## Project setup
 ```
-npm install
+npm install deviceon-baidumap-marker-cluster
 ```
 
-### Compiles and hot-reloads for development
+## How to use
 ```
-npm run serve
-```
+import BmlMarkerClusterer from 'deviceon-baidumap-marker-cluster'
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Vue.use(BmlMarkerClusterer)
 
-### Lints and fixes files
-```
-npm run lint
-```
+<bml-marker-clusterer :averageCenter="true">
+</bml-marker-clusterer>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+window.addEventListener('message', function (e) {
+  if (e.data.type === 'baludCluster') {
+    if (e.data.value !== 'mouseout') {
+      // mouseover action
+      // e.data.value = {
+        //cluster center location
+        lat: 0,
+        lng: 0,
+        //markers location which under cluster
+        markers: [{
+          lat: 0,
+          lng: 0
+        },{...}]
+      }
+    } else {
+      // mouseout action
+      // e.data.value === 'mouseout
+    }
+  }
+})
+```
